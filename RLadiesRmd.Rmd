@@ -1,0 +1,191 @@
+---
+title: "RLadiesRmd"
+author: "Tanja"
+date: "20/06/2018"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: atelier-lakeside-light
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/c/c1/Rlogo.png)
+???
+
+Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rlogo.png)
+---
+#R Markdown 💻📊📈📃
+
+
+Enables you to:
+- save and execute code and display its output
+- create high quality reports that could include [LaTeX](https://www.latex-project.org/) equations
+
+[R Markdown](https://rmarkdown.rstudio.com/) documents are fully reproducable and support many static and dynamic output formts, to name a few: PDF, HTML, MS Word, Beamer... 
+
+It is a variant of [Markdown](https://daringfireball.net/projects/markdown/) that has embedded **R code chunks** (denoted by three backticks), to be used with [knitr](https://yihui.name/knitr/) to make it easy to create reproducible web-based reports. 
+
+To use **R Markdown** you will need to install package from [CRAN](https://cran.r-project.org/) and load it with:
+
+```{r eval=FALSE, warnings=FALSE, message=FALSE}
+install.packages("rmakdown",repos = "http://cran.us.r-project.org")
+suppressPackageStartupMessages(library(rmarkdown))
+```
+---
+class: middle
+
+```{r, out.width = "1000px", echo=FALSE}
+knitr::include_graphics("RMarkdown.png")
+```
+
+You would deffinitely find usefull the following:
+
+- [The R Markdown Cheatsheet](https://ntaback.github.io/UofT_STA130/rmarkdown-2.0.pdf)
+
+- [The R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+---
+#Starting with RMarkdown
+
+**<span style="color:red">Task 1</span>:**
+Open the file `RMarkdown_Intro.Rmd`
+
+- Change the title of the Markdown Document from `My First Markdown Document` to `RMarkdown Introduction`.
+
+-  Click the **"Knit"** button to see the compiled version of your sample code.
+---
+class: inverse, center, middle
+
+##Congratulations! You’ve just Knitted your $1^{st}$ Rmd document!!!! 👍😃
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("kramer_congrats.gif")
+```
+---
+## Basic Text editing
+
+**<span style="color:red">Task 2</span>:**
+Let’s formatted this document further by
+
+- Changing the author of the document to your own name.
+
+- Rewriting the first sentence of the document to say "This is my first R Markdown document."
+
+- Recompiling the document so you can see your changes.
+---
+##Adding a link
+
+You can turn a word into a link by surrounding it in **hard brackets: [ ]** and then placing the link behind it in **parentheses: ( )**, like this:
+
+[RStudio] (www.rstudio.com)
+
+**<span style="color:red">Task 3</span>:**
+Make GitHub in the following paragraph link to https://github.com/RLadiesBelgrade/RL_IntroRmd
+---
+#Text formatting 
+
+To embed formatting instructions into your document using Markdown, you
+would surround text by:
+- one asterisks to make it italic: *italic*;
+- two asterisks to make it bold: **bold** and
+- backticks to make it monospaced: `monospaced`.
+
+To make an ordered list you need to place each item on a new line after a
+number followed by a period followed by a space:
+1. order list
+2. item 2
+Note that you need to place a blank line between the list and any paragraphs
+that come before it.
+---
+##**<span style="color:red">Task 4</span>:**
+
+- Make the following paragraph in your Rmd document look like this:
+
+The variables can be one of two broad types:
+
+1) **Attribute variable**: has its outcomes described in terms of its characteristics or
+attributes;
+
+2) **Measured variable**: has the resulting outcome expressed in numerical terms.
+
+- Make word Knit in the following paragraph bold.
+---
+#Embeding the `R` code 
+To embed an R code chunk you would use three back ticks:
+
+` ```{r} `
+
+` chunk of code`
+
+` ``` `
+
+**<span style="color:red">Task 5</span>**: Replace the `cars` data set with the `gapminder` data set.
+
+You can also embed plots by setting `echo = FALSE` to the code chunk to
+prevent printing of the R code that generates the plot:
+
+` ```{r, echo=FALSE} `
+
+` chunk of code`
+
+` ``` `
+---
+**<span style="color:red">Task 6</span>**: Replace the base boxplot of mpg vs. cyl by a ggplot's boxplot to examine a relationship between `continent` and `lifeExp` (remember to use some of the `dplyr` functions too!).
+
+```{r eval=FALSE}
+{r gapminder_boxplot, echo=FALSE, warnings=FALSE, message=FALSE}
+suppressPackageStartupMessages(library(dplyr))
+library(ggplot2)
+# ggplot boxplot
+ggplot(gapminder, aes(x = continent, y = lifeExp)) +
+  geom_boxplot(outlier.colour = "hotpink") +
+  geom_jitter(position = position_jitter(width = 0.1, height = 0), alpha = .2) +
+  labs (title= "Life Exp. vs. Continent", 
+        x = "Continent", y = "Life Exp.") +
+  theme(legend.position = "none", 
+        panel.border = element_rect(fill = NA, 
+                                    colour = "black",
+                                    size = .75),
+        plot.title=element_text(hjust=0.5))
+```
+---
+##Adding **LaTex** equations
+
+Finally, if you wish to add mathematical equations to your Markdown
+document you can easily embed LaTeX math equations into your report.
+
+To display equation in its own line it needs to be surrounded by double dollar
+symbol `$$` `y = a + bx` `$$`, or to embed an equation in line within the text you
+would use only one dollar symbol: `$y = a + bx$`.
+
+**<span style="color:red">Task 7</span>**: Display the equation into it’s own line.
+---
+class: inverse, center, middle
+
+#Congratulations! You have got the basics to start creating your own fabulous dynamic documents… !!!! 👍😃
+
+```{r, out.width = "300px", echo=FALSE}
+knitr::include_graphics("giphy.gif")
+```
+---
+class: inverse, center, middle
+# Thanks!
+
+Please let us get to know you by filling the form:
+<https://tatjanakec.shinyapps.io/RLadies_Form/>
+
+[www.datateka.com](www.datateka.com) 
+
+[tanjakec.github.io](tanjakec.github.io)
+
+@DataTeka 
+
+@Tatjana_Kec
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
+The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
